@@ -17,9 +17,14 @@ namespace WeatherApplication.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(WeatherDataModel? weatherData)
+        public IActionResult Index(WeatherDataModel? weatherData, string? errorMessage)
         {
             ModelState.Clear();
+            if (errorMessage != null)
+            {
+                ViewBag.ErrorMessage = errorMessage;   
+                return View(weatherData);
+            } 
             return View(weatherData);
         }
 
@@ -29,6 +34,12 @@ namespace WeatherApplication.Controllers
             try 
             {
                 WeatherDataModel requestWeatherData = await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
+                if (requestWeatherData == null)
+                {
+                    string errorMessage = "Input a valid location";
+                    return RedirectToAction("Index", new { errorMessage = errorMessage });
+                }
+                  
                 return RedirectToAction("Index", requestWeatherData);
             }
             catch (Exception ex)
