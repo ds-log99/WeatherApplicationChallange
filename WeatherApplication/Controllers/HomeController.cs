@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WeatherApplication.Models;
+using WeatherApplication.Repositories;
 
 namespace WeatherApplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IWeatherApiGetCalls weatherApiGet;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IWeatherApiGetCalls weatherApiGet)
         {
             _logger = logger;
+            this.weatherApiGet = weatherApiGet;
         }
 
         [HttpGet]
@@ -20,9 +23,9 @@ namespace WeatherApplication.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetWeatherData(WeatherDataModel weatherData) 
+        public async Task<IActionResult> GetWeatherData(WeatherDataModel weatherData) 
         {
-       
+            await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
             return RedirectToAction("Index", weatherData);
         }
 
