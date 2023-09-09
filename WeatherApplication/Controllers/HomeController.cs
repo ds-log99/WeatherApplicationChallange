@@ -34,8 +34,6 @@ namespace WeatherApplication.Controllers
                 _logger.LogError(ex.Message, "Error occured when processing the request it has not been successful");
                 return BadRequest(ex.Message);
             }
-           
-         
         }
 
         /*

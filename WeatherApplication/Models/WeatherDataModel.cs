@@ -5,7 +5,7 @@ namespace WeatherApplication.Models
     public class WeatherDataModel
     {
         [Required]
-        [StringLength(150)]
+        [StringLength(150, ErrorMessage = "The location entered it is too long")]
         public string Location { get; set; }
         public string CurrentTemperature { get; set; }
         public string MinTemperature { get; set; }
