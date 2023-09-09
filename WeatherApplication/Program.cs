@@ -1,7 +1,11 @@
+using WeatherApplication.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IWeatherApiGetCalls, GetApiCalls>();
 
 var app = builder.Build();
 

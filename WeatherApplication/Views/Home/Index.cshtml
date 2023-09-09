@@ -1,8 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model WeatherApplication.Models.WeatherDataModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container-sm">
+    <form class="form" method="get" asp-action="GetWeatherData" asp-controller="Home"> 
+    <div class="row">
+        <div class="text-center">
+            <h1 class="display-4">Daniel's Wheather Application</h1>
+            <br />
+        </div>
+    </div>
+    <div class="row">
+            <div class="input-group">
+                <input type="search" class="form-control rounded-3" placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+                       asp-for="@Model.Location" />
+                <button type="submit" class="btn btn-primary rounded-3">search</button>
+            </div>
+    </div>
+    </form>
+
 </div>
+
