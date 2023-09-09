@@ -1,7 +1,9 @@
-﻿namespace WeatherApplication.Repositories
+﻿using WeatherApplication.Models;
+
+namespace WeatherApplication.Repositories
 {
     public interface IWeatherApiGetCalls
     {
-       public Task GetWeatherForecastAsync(string location);
+       public Task<WeatherDataModel> GetWeatherForecastAsync(string location);
     }
 }

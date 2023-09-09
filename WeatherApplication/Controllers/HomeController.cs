@@ -25,8 +25,8 @@ namespace WeatherApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWeatherData(WeatherDataModel weatherData) 
         {
-            await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
-            return RedirectToAction("Index", weatherData);
+            WeatherDataModel requestWeatherData = await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
+            return RedirectToAction("Index", requestWeatherData);
         }
 
         /*
