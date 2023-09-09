@@ -19,6 +19,7 @@ namespace WeatherApplication.Controllers
         [HttpGet]
         public IActionResult Index(WeatherDataModel? weatherData)
         {
+            ModelState.Clear();
             return View(weatherData);
         }
 
@@ -29,19 +30,13 @@ namespace WeatherApplication.Controllers
             {
                 WeatherDataModel requestWeatherData = await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
                 return RedirectToAction("Index", requestWeatherData);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message, "Error occured when processing the request it has not been successful");
                 return BadRequest(ex.Message);
             }
         }
 
-        /*
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        */
     }
 }
