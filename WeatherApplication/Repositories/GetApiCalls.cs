@@ -23,7 +23,7 @@ namespace WeatherApplication.Repositories
                 string authToken = configuration.GetValue<string>("ConnectionStrings:AuthToken");
                 string apiKey = configuration.GetValue<string>("ConnectionStrings:ApiKey");
 
-                var request = new HttpRequestMessage(HttpMethod.Get, @"https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + @"=London&days=1&aqi=no&alerts=no");
+                var request = new HttpRequestMessage(HttpMethod.Get, @"https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + @"="+location+"&days=1&aqi=no&alerts=no");
                 request.Headers.Add("Authorization", $"Bearer {authToken}");
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -37,7 +37,6 @@ namespace WeatherApplication.Repositories
             };   
            
         }
-
         private WeatherDataModel GetWeatherData(JObject dataAsJson)
         {
             var weatherResponseData = new WeatherDataModel();

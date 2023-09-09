@@ -16,7 +16,38 @@
                 <button type="submit" class="btn btn-primary rounded-3">search</button>
             </div>
     </div>
+    <br/>
     </form>
+
+    @if (Model is not null)
+    {
+        <table class="table table-bordered">
+            <thead class="bg-primary">
+                <tr class="text-white">
+                    <th scope="col">Location</th>
+                    <th scope="col">Current Temperature</th>
+                    <th scope="col">Maximum Temperature</th>
+                    <th scope="col">Minimum Temperature</th>
+                    <th scope="col">Humidity</th>
+                    <th scope="col">Sunrise</th>
+                    <th scope="col">Sunset</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Location</td>
+                    <td>@Model.CurrentTemperature</td>
+                    <td>@Model.MaxTemperature</td>
+                    <td>@Model.MinTemperature</td>
+                    <td>@Model.Humidity</td>
+                    <td>@Model.Sunrise</td>
+                    <td>@Model.Sunset</td>
+                </tr>
+            </tbody>
+
+        </table>
+    
+    }
 
 </div>
 

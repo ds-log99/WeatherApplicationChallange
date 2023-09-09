@@ -19,14 +19,23 @@ namespace WeatherApplication.Controllers
         [HttpGet]
         public IActionResult Index(WeatherDataModel? weatherData)
         {
-            return View();
+            return View(weatherData);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetWeatherData(WeatherDataModel weatherData) 
         {
-            WeatherDataModel requestWeatherData = await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
-            return RedirectToAction("Index", requestWeatherData);
+            try 
+            {
+                WeatherDataModel requestWeatherData = await weatherApiGet.GetWeatherForecastAsync(weatherData.Location);
+                return RedirectToAction("Index", requestWeatherData);
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, "Error occured when processing the request it has not been successful");
+                return BadRequest(ex.Message);
+            }
+           
+         
         }
 
         /*
