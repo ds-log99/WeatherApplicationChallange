@@ -23,8 +23,8 @@ namespace WeatherApplication.Repositories
             {
                 using (var client = new HttpClient())
                 {
-                    string authToken = configuration.GetValue<string>("ConnectionStrings:AuthToken");
-                    string apiKey = configuration.GetValue<string>("ConnectionStrings:ApiKey");
+                    string? authToken = configuration.GetValue<string>("ConnectionStrings:AuthToken");
+                    string? apiKey = configuration.GetValue<string>("ConnectionStrings:ApiKey");
 
                     var request = new HttpRequestMessage(HttpMethod.Get, @"https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + @"=" + location + "&days=1&aqi=no&alerts=no");
                     request.Headers.Add("Authorization", $"Bearer {authToken}");
